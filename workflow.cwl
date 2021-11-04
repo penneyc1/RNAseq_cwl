@@ -19,21 +19,13 @@ inputs:
     doc: "Absolute path to kallisto index file, .idx extension."
   star_index:
     type: File?
-    doc: "Absolute path to STAR index file, (/data/starIndex_hg38_no_alt.tar.gz)                                                                              ."
-  # rsem_index:
-  #   type: File?
-  #   doc: "Absolute path to RSEM index file, (/data/rsem_ref_hg38_no_alt.tar.gz).                                                                              "
+    doc: "Absolute path to STAR index file, (/data/starIndex_hg38_no_alt.tar.gz)                                                                              ."                                                                              "
   stargenomedir:
     type: Directory
-    doc: "Absolute path to STAR genome directory, prepared with STAR_RSEM_prep.s                                                                              h script (from 'https://github.com/ENCODE-DCC/long-rna-seq-pipeline/blob/master/                                                                              DAC/STAR_RSEM.sh')."
-  # rsemrefdir:
-  #   type: Directory?
-  #   doc: "Absolute path to RSEM genome directory, prepared with STAR_RSEM_prep.s                                                                              h script (from 'https://github.com/ENCODE-DCC/long-rna-seq-pipeline/blob/master/                                                                              DAC/STAR_RSEM.sh')."
+    doc: "Absolute path to STAR genome directory, prepared with STAR_RSEM_prep.sh script (from 'https://github.com/ENCODE-DCC/long-rna-seq-pipeline/blob/master/DAC/STAR_RSEM.sh')."
   datatype:
     type: string
     doc: "Datatype for rMATS - e.g., 'paired'."
-  # nthreadsrsem:
-  #   type: int?
 ## rMATS
   s1:
     type: File
@@ -149,36 +141,6 @@ outputs:
       type: array
       items: File
     outputSource: kallisto/quantification
-#  starbamout:
-#    type:
-#      type: array
-#      items: File
-#    outputSource: star-rsem/starbamout
-#  starlogfinalout:
-#    type:
-#      type: array
-#      items: File
-#    outputSource: star-rsem/starlogfinalout
-#  rsemgenequants:
-#    type:
-#      type: array
-#      items: File
-#    outputSource: star-rsem/rsemgenequants
-#  rsemtranscriptquants:
-#    type:
-#      type: array
-#      items: File
-#    outputSource: star-rsem/rsemtranscriptquants
-#  rsemdiagnosticplots:
-#    type:
-#      type: array
-#      items: File
-#    outputSource: star-rsem/rsemdiagnosticplots
-#  rsembigwigfiles:
-#    type:
-#      type: array
-#      items: File
-#    outputSource: star-rsem/rsembigwigfiles
 ##rMATS
   rmatsoutput:
     type:
