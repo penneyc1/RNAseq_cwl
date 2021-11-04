@@ -1,0 +1,2 @@
+ID	GeneID	geneSymbol	chr	strand	longExonStart_0base	longExonEnd	shortES	shortEE	flankingES	flankingEE
+2278	"ENSG00000142910.15"	"TINAGL1"	chr1	+	31585439	31585876	31585439	31585485	31586709	31586755
