@@ -64,3 +64,12 @@ rmatsoutputdir:
 rmatstempdir:
   class: Directory
   path: /mnt/isilon/choi_lab/users/penneyc/experiments/CP218_RNASeq_Pipeline/rmatstest/tmp
+
+##____________RSEM_________________##
+## "rsem_upstream_reads" and "rsem_downstream_reads" are same format as "fastqs" above, i.e., comma separated list of reads.
+ rsem_upstream_reads: [path/to/read/1,path/to/read/2]
+ rsem_downstream_reads: [path/to/read/1,path/to/read/2]
+ ## "rsem_reference_name" points to the output of 'rsem-prepare-reference' which needs to be run before this step can be run (see "https://deweylab.github.io/RSEM/rsem-prepare-reference.html" for details).
+ rsem_reference_name: path/to/reference/and/name
+ ## "rsem_sample_name" is the desired experiment_ID or sample name for your RSEM runs.
+ rsem_sample_name: desired_sample_name
