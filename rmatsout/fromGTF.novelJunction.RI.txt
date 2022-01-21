@@ -1,2 +1,0 @@
-ID	GeneID	geneSymbol	chr	strand	riExonStart_0base	riExonEnd	upstreamES	upstreamEE	downstreamES	downstreamEE
-2727	"ENSG00000142910.15"	"TINAGL1"	chr1	+	31585439	31586755	31585439	31585485	31586709	31586755
