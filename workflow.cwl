@@ -34,7 +34,15 @@ inputs:
     type: Directory
   rmatstempdir:
     type: Directory
-
+  rsem_upstream_reads:
+    type: string[]
+  rsem_downstream_reads:
+    type: string[]
+  rsem_reference_name:
+    type: string
+  rsem_sample_name:
+    type: string
+    
 outputs:
   quantification:
     type:
@@ -63,6 +71,11 @@ outputs:
       type: array
       items: File
     outputSource: rmats/rmatsoutput
+  rsem_output:
+    type:
+      type: array
+      items: File
+    outputSource: rsem/rsem_output
 steps:
   kallisto:
     run: kallisto.cwl
@@ -128,3 +141,17 @@ steps:
         source: rmatstempdir
     out:
       - rmatsoutput
+  rsem:
+    doc: "RSEM"
+    run: "rsem.cwl"
+    in:
+      rsem_upstream_reads:
+        source: rsem_upstream_reads
+      rsem_downstream_reads:
+        source: rsem_downstream_reads
+      rsem_reference_name:
+        source: rsem_reference_name
+      rsem_sample_name:
+        source: rsem_sample_name
+    out:
+      - rsem_output
