@@ -1,32 +1,25 @@
+#!/usr/bin/env cwl-runner
 cwlVersion: v1.0
 class: Workflow
 
 requirements:
-  SubworkflowFeatureRequirement: {}
-  ScatterFeatureRequirement: {}
-  StepInputExpressionRequirement: {}
-  InlineJavascriptRequirement: {}
+  - class: ScatterFeatureRequirement
 
 inputs:
-  fastq1:
-    type: File
-    doc: "Paired-end read 1. Used in fastqc, kallisto."
-  fastq2:
-    type: File
-    doc: "Paired-end read 2. Used in fastqc, kallisto."
   kallisto_index:
     type: File
-    doc: "Absolute path to kallisto index file, .idx extension."
-  star_index:
-    type: File?
-    doc: "Absolute path to STAR index file, (/data/starIndex_hg38_no_alt.tar.gz)                                                                              ."                                                                              "
+  fastq1list: File[]
+  fastq2list: File[]
+  fastqs: string[]
   stargenomedir:
     type: Directory
-    doc: "Absolute path to STAR genome directory, prepared with STAR_RSEM_prep.sh script (from 'https://github.com/ENCODE-DCC/long-rna-seq-pipeline/blob/master/DAC/STAR_RSEM.sh')."
-  datatype:
+  nthread:
+    type: int
+  staroutputprefix: string[]
+  staroutsunmapped:
     type: string
-    doc: "Datatype for rMATS - e.g., 'paired'."
-## rMATS
+  staroutsamattributes:
+    type: string
   s1:
     type: File
   s2:
@@ -37,46 +30,59 @@ inputs:
     type: string
   readlength:
     type: int
-  nthread:
-    type: int
   rmatsoutputdir:
     type: Directory
   rmatstempdir:
     type: Directory
-## STAR
-  staroutputprefix:
-    type: string
-  staroutsamtype:
-    type: string
-  staroutsunmapped:
-    type: string
-  staroutsamattributes:
-    type: string
 
+outputs:
+  quantification:
+    type:
+      type: array
+      items: File
+    outputSource: kallisto/quantification
+  fastqc_zip:
+    type:
+      type: array
+      items: File
+    outputSource: fastqc/fastqc_zip
+  fastqc_html:
+    type:
+      type: array
+      items: File
+    outputSource: fastqc/fastqc_html
+  staroutputs:
+    type:
+      type: array
+      items:
+        type: array
+        items: File
+    outputSource: star/staroutputs
+  rmatsoutput:
+    type:
+      type: array
+      items: File
+    outputSource: rmats/rmatsoutput
 steps:
-  fastqc:
-    doc: fastqc - quality control for trimmed fastq
-    run: "fastqc.cwl"
+  kallisto:
+    run: kallisto.cwl
     in:
-      fastq1:
-        source: fastq1
-      fastq2:
-        source: fastq2
+      fastqR1: fastq1list
+      fastqR2: fastq2list
+      kallisto_index: kallisto_index
+    scatter:
+      - fastqR1
+      - fastqR2
+    scatterMethod: dotproduct
+    out:
+      - quantification
+  fastqc:
+    run: fastqc.cwl
+    in:
+      fastqs: fastqs
     out:
       - fastqc_zip
       - fastqc_html
-  kallisto:
-    doc: kallisto -  quant
-    run: "kallisto.cwl"
-    in:
-      fastq1:
-        source: fastq1
-      fastq2:
-        source: fastq2
-      kallisto_index:
-        source: kallisto_index
-    out:
-      - quantification
   star:
     doc: star
     run: "star.cwl"
@@ -85,21 +91,19 @@ steps:
         source: stargenomedir
       nthread:
         source: nthread
-      fastq1:
-        source: fastq1
-      fastq2:
-        source: fastq2
-      staroutputprefix:
-        source: staroutputprefix
-      staroutsamtype:
-        source: staroutsamtype
+      fastqR1: fastq1list
+      fastqR2: fastq2list
+      staroutputprefix: staroutputprefixlist
       staroutsunmapped:
         source: staroutsunmapped
       staroutsamattributes:
         source: staroutsamattributes
-    out:
-      - staroutputs
-
+    scatter:
+      - fastqR1
+      - fastqR2
+      - staroutputprefix
+    scatterMethod: dotproduct
+    out: [staroutputs]
   rMATS:
     doc: "rMATS"
     run: "rmats.cwl"
@@ -124,32 +128,3 @@ steps:
         source: rmatstempdir
     out:
       - rmatsoutput
-
-outputs:
-  out_fastqc_zip:
-    type:
-      type: array
-      items: File
-    outputSource: fastqc/fastqc_zip
-  out_fastqc_html:
-    type:
-      type: array
-      items: File
-    outputSource: fastqc/fastqc_html
-  quantification:
-    type:
-      type: array
-      items: File
-    outputSource: kallisto/quantification
-##rMATS
-  rmatsoutput:
-    type:
-      type: array
-      items: File
-    outputSource: rMATS/rmatsoutput
-##STAR
-  staroutputs:
-    type:
-      type: array
-      items: File
-    outputSource: star/staroutputs
