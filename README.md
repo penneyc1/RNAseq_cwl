@@ -1,6 +1,11 @@
 # RNAseq_cwl
-Pipeline for processing fastq files - fastqc-kallisto-star-rmats
+Pipeline for processing fastq files through one or more of: fastqc-kallisto-star-rmats.
 
-Modify workflow commands and job.yml to run on cluster
+Requires cwltool, fastqc, kallisto, STAR and rMATS to be installed and pointed to by your $PATH variable.
 
-Test data included to try out package functionality
+Modify "job.yml" with the fastq files, filepaths and directories you would like to use for the job (see job.yml for more detailed instructions), then run as batch job (or off the command-line in interactive mode).
+
+Usage:
+
+cwl-runner workflow.cwl job.yml
+
