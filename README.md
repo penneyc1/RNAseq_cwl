@@ -9,3 +9,4 @@ Usage:
 
 cwl-runner workflow.cwl job.yml
 
+To decide to not use a tool simply comment out its associated lines in the workflow file (i.e., in input, steps and output). The job.yml file can remain as it is.
