@@ -2,7 +2,7 @@
 cwlVersion: v1.0
 class: CommandLineTool
 
-baseCommand: "rsem-calculate-expression"
+baseCommand: ["rsem-calculate-expression", "--paired-end"]
 
 inputs:
 
