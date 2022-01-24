@@ -3,13 +3,13 @@ Pipeline for processing fastq files through one or more of: Cutadapt-Fastqc-kall
 
 Requires an environment with the following programs installed and pointed to by your $PATH variable.
 
-1.) cwltool
-2.) cutadapt
-3.) fastqc
-4.) kallisto
-5.) STAR
-6.) RSEM 
-7.) rMATS 
+  1.) cwltool
+  2.) cutadapt
+  3.) fastqc
+  4.) kallisto
+  5.) STAR
+  6.) RSEM 
+  7.) rMATS 
 
 Additionally requires a STAR index directory (see manual @ https://physiology.med.cornell.edu/faculty/skrabanek/lab/angsd/lecture_notes/STARmanual.pdf) and that you've ran RSEM's "rsem-prepare-reference" (see manual @ https://deweylab.github.io/RSEM/rsem-prepare-reference.html) command and can point to its output. 
 
