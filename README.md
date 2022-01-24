@@ -1,7 +1,7 @@
 # RNAseq_cwl
 Pipeline for processing fastq files through one or more of: Cutadapt-Fastqc-kallisto-STAR-rMATS-RSEM.
 
-Requires an environment (conda environment suggested) with the following programs installed and pointed to by your $PATH variable. The code is confirmed to work with the versions listed below.
+Requires that the following programs be installed and pointed to by your $PATH variable. The code is confirmed to work with the versions listed below.
 
   1.) cwltool: v1.0.20191225192155
   
