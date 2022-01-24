@@ -26,13 +26,6 @@ inputs:
 ## STAR ##
 
   fastqs: string[]
-  
-## Note:stargenomedir and nthread are used by both star and rMATS.
-  
-  stargenomedir:
-    type: Directory
-  nthread:
-    type: int
   staroutputprefixlist: string[]
   staroutsunmapped:
     type: string
@@ -55,6 +48,13 @@ inputs:
     type: Directory
   rmatstempdir:
     type: Directory
+
+## stargenomedir and nthread are used by both star and rMATS, if using one or both of those tools, keep these lines uncommented ##
+  
+  stargenomedir:
+    type: Directory
+  nthread:
+    type: int
 
 ## RSEM ##
 
