@@ -1,5 +1,5 @@
 # RNAseq_cwl
-Pipeline for processing fastq files through one or more of: Fastqc-kallisto-STAR-rMATS-RSEM.
+Pipeline for processing fastq files through one or more of: Cutadapt-Fastqc-kallisto-STAR-rMATS-RSEM.
 
 Requires an environment with cwltool, fastqc, kallisto, STAR, RSEM and rMATS installed and pointed to by your $PATH variable.
 
