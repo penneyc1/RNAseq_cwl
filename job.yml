@@ -1,6 +1,6 @@
 ##_______________Catadapt_____________##
 
-##Inputs must be matching pairs. Specify input file pairs and desired output filenames and adapters to run.
+##Inputs can be either single or matching-paired end reads. Specify input files and desired output filenames and adapters to run.
 
 cutadapt_forward_input_names: [/mnt/isilon/choi_lab/users/penneyc/experiments/CP219_Final_RNAseq_Pipeline/inputdata/231ESRP.25K.rep-1.R1.fastq, /mnt/isilon/choi_lab/users/penneyc/experiments/CP219_Final_RNAseq_Pipeline/inputdata/231ESRP.25K.rep-1.R2.fastq]
 cutadapt_forward_output_names: [/mnt/isilon/choi_lab/users/penneyc/experiments/CP219_Final_RNAseq_Pipeline/inputdata/231ESRP.25K.rep-1.R1.cut.fastq, /mnt/isilon/choi_lab/users/penneyc/experiments/CP219_Final_RNAseq_Pipeline/inputdata/231ESRP.25K.rep-1.R2.cut.fastq]
