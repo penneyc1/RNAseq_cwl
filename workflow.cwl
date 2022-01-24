@@ -6,6 +6,14 @@ requirements:
   - class: ScatterFeatureRequirement
 
 inputs:
+
+  cutadapt_forward_input_names: string[]
+  cutadapt_forward_output_names: string[]
+  cutadapt_reverse_input_names: string[]
+  cutadapt_reverse_output_names: string[]
+  cutadapt_forward_adapter: string
+  cutadapt_reverse_adapter: string
+
   kallisto_index:
     type: File
   fastq1list: File[]
@@ -42,8 +50,13 @@ inputs:
     type: string
   rsem_sample_name:
     type: string
-    
+
 outputs:
+  cutadapt_output:
+    type:
+      type: array
+      items: File
+    outputSource: cutadapt/cutadapt_output
   quantification:
     type:
       type: array
@@ -77,6 +90,23 @@ outputs:
       items: File
     outputSource: rsem/rsem_output
 steps:
+  cutadapt:
+    run: cutadapt.cwl
+    in: 
+      cutadapt_input_forward: cutadapt_forward_input_names
+      cutadapt_input_reverse: cutadapt_reverse_input_names
+      cutadapt_output_forward: cutadapt_forward_output_names
+      cutadapt_output_reverse: cutadapt_reverse_output_names
+      cutadapt_forward_adapter: cutadapt_forward_adapter
+      cutadapt_reverse_adapter: cutadapt_reverse_adapter
+    scatter:
+      - cutadapt_input_forward
+      - cutadapt_input_reverse
+      - cutadapt_output_forward
+      - cutadapt_output_reverse
+    scatterMethod: dotproduct
+    out:
+      - cutadapt_output
   kallisto:
     run: kallisto.cwl
     in:
