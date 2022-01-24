@@ -7,6 +7,8 @@ requirements:
 
 inputs:
 
+##CUTADAPT##
+
   cutadapt_forward_input_names: string[]
   cutadapt_forward_output_names: string[]
   cutadapt_reverse_input_names: string[]
@@ -14,11 +16,17 @@ inputs:
   cutadapt_forward_adapter: string
   cutadapt_reverse_adapter: string
 
+##KALLISTO## 
+
   kallisto_index:
     type: File
   fastq1list: File[]
   fastq2list: File[]
+
+##STAR##
+
   fastqs: string[]
+##Note:stargenomedir and nthread are used by both star and rMATS.
   stargenomedir:
     type: Directory
   nthread:
@@ -28,6 +36,9 @@ inputs:
     type: string
   staroutsamattributes:
     type: string
+
+##rMATS##
+
   s1:
     type: File
   s2:
@@ -42,6 +53,9 @@ inputs:
     type: Directory
   rmatstempdir:
     type: Directory
+
+##RSEM##
+
   rsem_upstream_reads:
     type: string[]
   rsem_downstream_reads:
@@ -89,7 +103,10 @@ outputs:
       type: array
       items: File
     outputSource: rsem/rsem_output
+
+
 steps:
+
   cutadapt:
     run: cutadapt.cwl
     in: 
@@ -107,6 +124,7 @@ steps:
     scatterMethod: dotproduct
     out:
       - cutadapt_output
+
   kallisto:
     run: kallisto.cwl
     in:
@@ -119,6 +137,7 @@ steps:
     scatterMethod: dotproduct
     out:
       - quantification
+  
   fastqc:
     run: fastqc.cwl
     in:
@@ -126,6 +145,7 @@ steps:
     out:
       - fastqc_zip
       - fastqc_html
+  
   star:
     doc: star
     run: "star.cwl"
@@ -147,6 +167,7 @@ steps:
       - staroutputprefix
     scatterMethod: dotproduct
     out: [staroutputs]
+  
   rMATS:
     doc: "rMATS"
     run: "rmats.cwl"
@@ -171,6 +192,7 @@ steps:
         source: rmatstempdir
     out:
       - rmatsoutput
+
   rsem:
     doc: "RSEM"
     run: "rsem.cwl"
