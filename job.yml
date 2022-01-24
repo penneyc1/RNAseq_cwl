@@ -1,3 +1,16 @@
+##_______________Catadapt_____________##
+
+##Inputs must be matching pairs. Specify input file pairs and desired output filenames and adapters to run.
+
+cutadapt_forward_input_names: [/mnt/isilon/choi_lab/users/penneyc/experiments/CP219_Final_RNAseq_Pipeline/inputdata/231ESRP.25K.rep-1.R1.fastq, /mnt/isilon/choi_lab/users/penneyc/experiments/CP219_Final_RNAseq_Pipeline/inputdata/231ESRP.25K.rep-1.R2.fastq]
+cutadapt_forward_output_names: [/mnt/isilon/choi_lab/users/penneyc/experiments/CP219_Final_RNAseq_Pipeline/inputdata/231ESRP.25K.rep-1.R1.cut.fastq, /mnt/isilon/choi_lab/users/penneyc/experiments/CP219_Final_RNAseq_Pipeline/inputdata/231ESRP.25K.rep-1.R2.cut.fastq]
+
+cutadapt_reverse_input_names: [/mnt/isilon/choi_lab/users/penneyc/experiments/CP219_Final_RNAseq_Pipeline/inputdata/231ESRP.25K.rep-1.R1.fastq, /mnt/isilon/choi_lab/users/penneyc/experiments/CP219_Final_RNAseq_Pipeline/inputdata/231ESRP.25K.rep-1.R2.fastq]
+cutadapt_reverse_output_names: [/mnt/isilon/choi_lab/users/penneyc/experiments/CP219_Final_RNAseq_Pipeline/inputdata/231ESRP.25K.rep-1.R1.cut.fastq, /mnt/isilon/choi_lab/users/penneyc/experiments/CP219_Final_RNAseq_Pipeline/inputdata/231ESRP.25K.rep-1.R2.cut.fastq]
+
+cutadapt_forward_adapter: AACCGGTT
+cutadapt_reverse_adapter: TTGGCCAA
+
 ##_______________FastQC_______________##
 
 ## 'fastqs' is a comma separated list of all fastq files for processing through fastqc.
