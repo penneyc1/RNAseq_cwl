@@ -7,7 +7,7 @@ requirements:
 
 inputs:
 
-##CUTADAPT##
+## CUTADAPT ##
 
   cutadapt_forward_input_names: string[]
   cutadapt_forward_output_names: string[]
@@ -16,18 +16,18 @@ inputs:
   cutadapt_forward_adapter: string
   cutadapt_reverse_adapter: string
 
-##KALLISTO## 
+## KALLISTO ## 
 
   kallisto_index:
     type: File
   fastq1list: File[]
   fastq2list: File[]
 
-##STAR##
+## STAR ##
 
   fastqs: string[]
   
-##Note:stargenomedir and nthread are used by both star and rMATS.
+## Note:stargenomedir and nthread are used by both star and rMATS.
   
   stargenomedir:
     type: Directory
@@ -39,7 +39,7 @@ inputs:
   staroutsamattributes:
     type: string
 
-##rMATS##
+## rMATS ##
 
   s1:
     type: File
@@ -56,7 +56,7 @@ inputs:
   rmatstempdir:
     type: Directory
 
-##RSEM##
+## RSEM ##
 
   rsem_upstream_reads:
     type: string[]
@@ -68,16 +68,25 @@ inputs:
     type: string
 
 outputs:
+
+## CUTADAPT ##
+
   cutadapt_output:
     type:
       type: array
       items: File
     outputSource: cutadapt/cutadapt_output
+
+##  Kallisto ##
+
   quantification:
     type:
       type: array
       items: File
     outputSource: kallisto/quantification
+
+## Fastqc ##
+
   fastqc_zip:
     type:
       type: array
@@ -88,6 +97,9 @@ outputs:
       type: array
       items: File
     outputSource: fastqc/fastqc_html
+    
+## STAR ##
+
   staroutputs:
     type:
       type: array
@@ -95,6 +107,9 @@ outputs:
         type: array
         items: File
     outputSource: star/staroutputs
+    
+## rMATS ##
+    
   rmatsoutput:
     type:
       type: array
@@ -108,6 +123,8 @@ outputs:
 
 
 steps:
+
+## Cutadapt ## 
 
   cutadapt:
     run: cutadapt.cwl
@@ -127,6 +144,8 @@ steps:
     out:
       - cutadapt_output
 
+## kallisto ## 
+
   kallisto:
     run: kallisto.cwl
     in:
@@ -140,6 +159,8 @@ steps:
     out:
       - quantification
   
+## fastqc ##  
+  
   fastqc:
     run: fastqc.cwl
     in:
@@ -147,6 +168,8 @@ steps:
     out:
       - fastqc_zip
       - fastqc_html
+  
+## star ##  
   
   star:
     doc: star
@@ -169,7 +192,9 @@ steps:
       - staroutputprefix
     scatterMethod: dotproduct
     out: [staroutputs]
-  
+
+## rMATS ##
+
   rMATS:
     doc: "rMATS"
     run: "rmats.cwl"
@@ -194,6 +219,8 @@ steps:
         source: rmatstempdir
     out:
       - rmatsoutput
+
+## rsem ##
 
   rsem:
     doc: "RSEM"
