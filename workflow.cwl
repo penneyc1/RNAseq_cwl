@@ -26,7 +26,9 @@ inputs:
 ##STAR##
 
   fastqs: string[]
+  
 ##Note:stargenomedir and nthread are used by both star and rMATS.
+  
   stargenomedir:
     type: Directory
   nthread:
