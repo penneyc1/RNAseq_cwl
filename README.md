@@ -7,7 +7,7 @@ Modify "job.yml" with the fastq files, variables and directories you would like 
 
 Usage:
 
-cwl-runner workflow.cwl job.yml
+cwl-runner workflow.cwl manifest.yml
 
 To decide to not use a tool simply comment out its associated lines in the workflow file (i.e., all inputs, steps and outputs). The job.yml file can remain as it is.
 
